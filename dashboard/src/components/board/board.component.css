@@ -1,0 +1,19 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.board-row {
+  flex: 1;
+}
+
+.row-up {
+  display: flex;
+  flex: 1;
+}
+
+.program, .settings {
+  flex: 1;
+}

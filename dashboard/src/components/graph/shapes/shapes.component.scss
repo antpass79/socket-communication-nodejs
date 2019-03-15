@@ -1,0 +1,14 @@
+.canvas {
+    height: 100%;
+    div {
+        height: 100%;
+    }
+    .konvajs-content {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    canvas {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
