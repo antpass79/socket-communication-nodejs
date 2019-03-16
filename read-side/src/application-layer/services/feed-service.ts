@@ -1,30 +1,18 @@
-import { MongoClient } from 'mongodb';
-import { FeedRepository } from '../../infrastructure-layer/repositories/feed-repository';
 import { Feed } from '../../models/feed';
-import { MongoPool } from '../../infrastructure-layer/mongo-pool';
+import { SocketServer } from '../../infrastructure-layer/sockets/socket-server';
+import { NodeConfig } from '../../utilities/node-config';
 
 export class FeedService {
 
-  constructor() {
+  private socketServer: SocketServer = new SocketServer();
+
+  constructor(port: string) {
+    this.socketServer.listen(port);
   }
 
-  async add(feed: Feed): Promise<{ ok: boolean, insertedFeed: Feed }> {
-    let feedRepository = new FeedRepository(MongoPool.instance, 'distributedfeeds');
-    let insertedResult = await feedRepository.create(feed);
+  broadcast(feed: Feed) {
 
-    let result = {
-      ok: insertedResult.ok,
-      insertedFeed: {
-        id: insertedResult.insertedId,
-        text: feed.text
-      }
-    };
-
-    return result;
-  }
-
-  async remove(feedId: string): Promise<boolean> {
-    let feedRepository = new FeedRepository(MongoPool.instance, 'distributedfeeds');
-    return await feedRepository.delete(feedId);
+    if (this.socketServer.isReady)
+      this.socketServer.dispatchData<Feed>(feed, 'feedAdded');
   }
 }

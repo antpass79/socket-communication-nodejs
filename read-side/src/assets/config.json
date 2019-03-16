@@ -5,5 +5,7 @@
         "http://localhost:2000"
     ],
     "CONNECTION_STRING": "mongodb://localhost/",
-    "DATABASE_NAME": "distributedfeeds"
+    "DATABASE_NAME": "distributedfeeds",
+    "SERVER_SOCKET_PORT": 4001,
+    "CLIENT_SOCKET_ENDPINT": "http://localhost:4002"
 }

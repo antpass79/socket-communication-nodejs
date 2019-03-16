@@ -1,5 +1,3 @@
-import { Feed } from "../../models/feed";
-
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
@@ -12,7 +10,11 @@ export class SocketServer {
 
   private socket: any;
 
-  listen() {
+  get isReady() {
+    return this.socket != undefined;
+  }
+
+  listen(serverSocketPort: string) {
 
     io.on("connection", (socket: any) => {
       console.log("New write-side connected");
@@ -20,14 +22,14 @@ export class SocketServer {
       socket.on("disconnect", () => console.log("Write-side disconnected"));
     });
 
-    server.listen(port, () => console.log(`Listening on port ${port}`));
+    server.listen(serverSocketPort, () => console.log(`Listening on port ${serverSocketPort}`));
   }
 
   dispatchData<T>(data: T, eventName: string) {
     try {
       console.log(this.socket);
 
-      if (this.socket)
+      if (this.isReady)
         this.socket.emit(eventName, data);
     } catch (error) {
       console.error(`Error: ${error.code}`);
