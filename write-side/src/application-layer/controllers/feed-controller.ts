@@ -1,5 +1,9 @@
 import { FeedService } from "../services/feed-service";
 import { Feed } from '../../models/feed';
+import { SocketServer } from "../../infrastructure-layer/sockets/socket-server";
+
+let socketServer: SocketServer = new SocketServer();
+socketServer.listen();
 
 export class FeedController {
 
@@ -17,7 +21,9 @@ export class FeedController {
         if (result.ok) {
             console.log('Feed to send');
             console.log(result.insertedFeed);
-            res.send(result.insertedFeed);
+
+            socketServer.addFeed(result.insertedFeed);
+            res.sendStatus(200);
         }
         else {
             res.sendStatus(500);
