@@ -5,6 +5,7 @@ import { FeedList } from './feed-list/feed-list.component';
 import './program.component.css';
 import { Feed } from '../../models/feed';
 import { FeedService } from '../../services/feed.service';
+import { SocketClientService } from '../../services/socket-client.service';
 
 type props = {
 };
@@ -25,6 +26,20 @@ export class Program extends React.Component<props, state> {
         };
     }
 
+    componentDidMount() {    
+        let socketClientService = new SocketClientService('http://localhost:4001');
+        socketClientService.on('feedArrived', (feed: Feed) => {
+            console.log(feed);
+
+            this.setState(state => {
+                const feeds = [...state.feeds, feed];
+                return {
+                    feeds
+                };
+            });
+        });
+      }
+    
     setBusy = (busy: boolean) => {
 
         this.setState(() => {

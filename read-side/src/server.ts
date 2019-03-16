@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import { NodeConfig } from './utilities/node-config';
 import { MongoPool } from './infrastructure-layer/mongo-pool';
+import { SocketServer } from './infrastructure-layer/sockets/socket-hub';
 
 export class Server {
 
@@ -13,15 +14,14 @@ export class Server {
     }
 
     private _app: express.Application;
+    private _socketServer: SocketServer = new SocketServer();
 
     constructor(port: number | string) {
         this._port = port;
 
         this._app = express();
 
-        const http = require('http').Server(this._app);
-        const io = require('socket.io')(http);
-        io.
+        this._socketServer.listen();
 
         this.configure(this._app);
     }

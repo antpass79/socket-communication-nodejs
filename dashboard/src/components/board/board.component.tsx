@@ -9,10 +9,7 @@ type props = {
   squares?: number[],
   onClick?: any
 };
-type state = {
-  value: number
-};
-export class Board extends React.Component<props, state> {
+export class Board extends React.Component<props> {
 
   renderProgram() {
 
