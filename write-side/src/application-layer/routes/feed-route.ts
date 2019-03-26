@@ -1,15 +1,20 @@
 import * as express from "express";
 import { FeedController } from "../controllers/feed-controller";
+import { FeedServiceHub } from "../services/feed-service-hub";
 
 export class FeedRoute {
 
-    private feedController = new FeedController();
+    private feedController: FeedController;
+
+    constructor() {
+        this.feedController = new FeedController(new FeedServiceHub());
+    }
 
     initRoute(app: express.Application): express.Router {
 
         const router = express.Router()
-        router.post('/add', this.feedController.add);
-        router.post('/remove', this.feedController.remove);
+        router.post('/add', (req, res) => this.feedController.add(req, res));
+        router.post('/remove', (req, res) => this.feedController.remove(req, res));
 
         return router;
     }

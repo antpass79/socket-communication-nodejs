@@ -1,11 +1,11 @@
 import { FeedService } from "../services/feed-service";
 import { Feed } from '../../models/feed';
-import { SocketServer } from "../../infrastructure-layer/sockets/socket-server";
-
-let socketServer: SocketServer = new SocketServer();
-socketServer.listen();
+import { FeedServiceHub } from "../services/feed-service-hub";
 
 export class FeedController {
+
+    constructor(private feedServiceHub: FeedServiceHub) {
+    }
 
     async add(req: any, res: any) {
 
@@ -13,16 +13,11 @@ export class FeedController {
         console.log('feed');
         console.log(feed);
 
-        let feedService: FeedService = new FeedService();
-        let result = await feedService.add(feed);
+        let result = await this.feedServiceHub.add(feed);
         console.log('result');
         console.log(result);
 
-        if (result.ok) {
-            console.log('Feed to send');
-            console.log(result.insertedFeed);
-
-            socketServer.addFeed(result.insertedFeed);
+        if (result) {
             res.sendStatus(200);
         }
         else {
@@ -36,8 +31,7 @@ export class FeedController {
         console.log('feedId');
         console.log(feedId);
 
-        let feedService: FeedService = new FeedService();
-        let result = await feedService.remove(feedId);
+        let result = await this.feedServiceHub.remove(feedId);
         console.log('result');
         console.log(result);
 
