@@ -1,12 +1,13 @@
 import { Feed } from '../../models/feed';
 import { SocketServer } from '../../infrastructure-layer/sockets/socket-server';
-import { NodeConfig } from '../../utilities/node-config';
+import express = require('express');
 
 export class FeedService {
 
-  private socketServer: SocketServer = new SocketServer();
+  private socketServer: SocketServer;
 
-  constructor(port: string) {
+  constructor(app: express.Application, port: string) {
+    this.socketServer = new SocketServer(app);
     this.socketServer.listen(port);
   }
 

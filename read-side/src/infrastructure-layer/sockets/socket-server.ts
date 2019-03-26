@@ -1,14 +1,18 @@
-const express = require("express");
-const http = require("http");
-const socketIo = require("socket.io");
-const port = process.env.PORT || 4001;
-const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
+import express from 'express';
+import http from 'http';
+import socketIo from 'socket.io';
 
 export class SocketServer {
 
+  private socketIo: any;
   private socket: any;
+  private server: any;
+
+  constructor(app: express.Application) {
+
+    this.server = http.createServer(app);
+    this.socketIo = socketIo(this.server);
+  }
 
   get isReady() {
     return this.socket != undefined;
@@ -16,13 +20,14 @@ export class SocketServer {
 
   listen(serverSocketPort: string) {
 
-    io.on("connection", (socket: any) => {
-      console.log("New write-side connected");
+    this.socketIo.on("connection", (socket: any) => {      
+      console.log("New write-side connected to read-side");
+
       this.socket = socket;
-      socket.on("disconnect", () => console.log("Write-side disconnected"));
+      this.socket.on("disconnect", () => console.log("Write-side disconnected from read-side"));
     });
 
-    server.listen(serverSocketPort, () => console.log(`Listening on port ${serverSocketPort}`));
+    this.server.listen(serverSocketPort, () => console.log(`Read-side listening on port ${serverSocketPort}`));
   }
 
   dispatchData<T>(data: T, eventName: string) {
