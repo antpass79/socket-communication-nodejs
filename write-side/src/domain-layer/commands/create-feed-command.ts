@@ -1,5 +1,6 @@
-import { Command, ICommandHandler } from "../ddd/command";
-import { CommandHandlerFactory } from "../ddd/command-handler-factory";
+import { FeedServiceHub } from "../../application-layer/services/feed-service-hub";
+import { Feed } from "../../models/feed";
+import { CommandHandler, Command } from "../ddd/commands/command";
 
 export class CreateFeedCommand extends Command {
 
@@ -15,12 +16,31 @@ export class CreateFeedCommand extends Command {
     }
 }
 
-export class CreateFeedCommandHandler implements ICommandHandler<CreateFeedCommand> {
+export class CreateFeedCommandHandler extends CommandHandler<CreateFeedCommand> {
 
-    handle(command: CreateFeedCommand): void {
-        if (!command)
-        throw new Error("Invalid command");
+    constructor(private feedServiceHub: FeedServiceHub) {
+        super();
+    }
+
+    // protected functions
+
+    protected async onHandle(command: CreateFeedCommand): Promise<any> {
+
+        let feed: Feed = {
+            id: command.id,
+            text: command.text
+        };
+
+        let result = await this.feedServiceHub.add(feed);
+        console.log('result');
+        console.log(result);
+
+        if (!result) {
+            throw new Error("Adding feed failed");
+        }
+    }
+
+    protected validate(command: CreateFeedCommand): boolean {
+        return super.validate(command) && !!command.text;
     }
 }
-
-CommandHandlerFactory.register<CreateFeedCommand>(CreateFeedCommandHandler, 'CreateFeedCommandHandler');

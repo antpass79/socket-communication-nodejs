@@ -4,10 +4,9 @@ import { FeedServiceHub } from "../services/feed-service-hub";
 
 export class FeedRoute {
 
-    private feedController: FeedController;
+    private feedController: FeedController = new FeedController();
 
     constructor() {
-        this.feedController = new FeedController(new FeedServiceHub());
     }
 
     initRoute(app: express.Application): express.Router {

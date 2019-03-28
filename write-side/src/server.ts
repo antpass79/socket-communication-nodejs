@@ -5,6 +5,9 @@ import cors from 'cors';
 import { FeedRoute } from './application-layer/routes/feed-route';
 import { NodeConfig } from './utilities/node-config';
 import { MongoPool } from './infrastructure-layer/mongo-pool';
+import { CreateFeedCommand, CreateFeedCommandHandler } from './domain-layer/commands/create-feed-command';
+import { FeedServiceHub } from './application-layer/services/feed-service-hub';
+import { CommandBus } from './domain-layer/ddd/commands/command-bus';
 
 export class Server {
 
@@ -37,6 +40,7 @@ export class Server {
         this.configParser(app);
         this.configCors(app);
         this.configureRoutes(app);
+        this.registerCommands();
     }
 
     private configParser(app: express.Application) {
@@ -63,5 +67,10 @@ export class Server {
 
         let feedRoute = new FeedRoute();
         app.use('/feeds', feedRoute.initRoute(app));
+    }
+
+    private registerCommands() {
+        let feedServiceHub: FeedServiceHub = new FeedServiceHub();
+        CommandBus.register<CreateFeedCommand>(CreateFeedCommand.name, new CreateFeedCommandHandler(feedServiceHub));
     }
 }

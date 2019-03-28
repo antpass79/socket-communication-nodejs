@@ -29,4 +29,26 @@ The following picture shows the sequence diagram for add command of the first ve
 
 ## DDD
 
+### Command, CommandHandler and CommandBus
+
 - https://culttt.com/2014/11/10/creating-using-command-bus/
+
+- https://github.com/erickjth/simple-command-bus
+
+- http://cqrs.nu/Faq/command-handlers
+
+- https://enterprisecraftsmanship.com/2019/02/20/validate-commands-cqrs/
+
+### CQRS
+
+- https://watermill.io/docs/cqrs/
+
+### Event Sourcing
+
+- https://blog.risingstack.com/event-sourcing-with-examples-node-js-at-scale/
+
+- https://xebia.com/blog/cqrs-designing-the-event-store/
+
+- https://github.com/speedment/speedment/wiki/Tutorial:-Create-an-Event-Sourced-System
+
+- https://blog.sebastian-daschner.com/entries/event_sourcing_cqrs_video_course
