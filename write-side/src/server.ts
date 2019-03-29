@@ -8,7 +8,7 @@ import { MongoPool } from './infrastructure-layer/mongo-pool';
 import { CreateFeedCommand, CreateFeedCommandHandler } from './domain-layer/commands/create-feed-command';
 import { FeedServiceHub } from './application-layer/services/feed-service-hub';
 //import { CommandBus } from './domain-layer/ddd/commands/command-bus';
-import { CommandBus } from 'ddd-abstraction/lib/index';
+import { CommandBus } from 'ddd-abstraction';
 //let CommandBus = require('ddd-abstraction');
 
 export class Server {
