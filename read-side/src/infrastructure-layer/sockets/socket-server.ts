@@ -21,23 +21,21 @@ export class SocketServer {
   listen(serverSocketPort: string) {
 
     this.socketIo.on("connection", (socket: any) => {      
-      console.log("New write-side connected to read-side");
+      console.log("read-side connected to write-side");
 
       this.socket = socket;
-      this.socket.on("disconnect", () => console.log("Write-side disconnected from read-side"));
+      this.socket.on("disconnect", () => console.log("read-side disconnected from write-side"));
     });
 
-    this.server.listen(serverSocketPort, () => console.log(`Read-side listening on port ${serverSocketPort}`));
+    this.server.listen(serverSocketPort, () => console.log(`read-side listening on port ${serverSocketPort}`));
   }
 
   dispatchData<T>(data: T, eventName: string) {
     try {
-      console.log(this.socket);
-
       if (this.isReady)
         this.socket.emit(eventName, data);
     } catch (error) {
-      console.error(`Error: ${error.code}`);
+      console.error(`read-side error: ${error.code}`);
     }
   }
 }

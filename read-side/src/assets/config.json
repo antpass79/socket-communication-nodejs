@@ -1,11 +1,11 @@
 {
-    "LISTEN_PORT": 5000,
+    "LISTEN_PORT": 5005,
     "ORIGINS_WHITE_LIST": [
         "http://localhost:3000",
         "http://localhost:2000"
     ],
     "CONNECTION_STRING": "mongodb://localhost/",
     "DATABASE_NAME": "distributedfeeds",
-    "SERVER_SOCKET_PORT": 4001,
-    "CLIENT_SOCKET_ENDPINT": "http://localhost:4002"
+    "SERVER_SOCKET_PORT": 4005,
+    "CLIENT_SOCKET_ENDPOINT": "http://localhost:4002"
 }

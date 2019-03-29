@@ -34,7 +34,7 @@ export class Server {
         await MongoPool.connect();
 
         this._app.listen(this.port, () => {
-            console.log('Server listening on port ' + this.port);
+            console.log('read-side server listening on port ' + this.port);
         });
     }
 

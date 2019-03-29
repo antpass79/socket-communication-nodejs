@@ -1,13 +1,14 @@
 import { Feed } from '../../models/feed';
 import { CreateFeedCommand } from "../../domain-layer/commands/create-feed-command";
-import { CommandBus } from '../../domain-layer/ddd/commands/command-bus';
+// import { CommandBus } from '../../domain-layer/ddd/commands/command-bus';
+import { CommandBus } from 'ddd-abstraction/lib/index';
 
 export class FeedController {
 
     async add(req: any, res: any) {
 
         let feed: Feed = req.body.feed;
-        console.log('feed');
+        console.log('write-side feed:');
         console.log(feed);
 
         try {

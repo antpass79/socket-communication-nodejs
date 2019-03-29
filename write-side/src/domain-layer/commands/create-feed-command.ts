@@ -1,6 +1,7 @@
 import { FeedServiceHub } from "../../application-layer/services/feed-service-hub";
 import { Feed } from "../../models/feed";
-import { CommandHandler, Command } from "../ddd/commands/command";
+// import { CommandHandler, Command } from "../ddd/commands/command";
+import { CommandHandler, Command } from 'ddd-abstraction/lib/index';
 
 export class CreateFeedCommand extends Command {
 
@@ -32,11 +33,10 @@ export class CreateFeedCommandHandler extends CommandHandler<CreateFeedCommand> 
         };
 
         let result = await this.feedServiceHub.add(feed);
-        console.log('result');
-        console.log(result);
+        console.log('write-side result: ' + result);        
 
         if (!result) {
-            throw new Error("Adding feed failed");
+            throw new Error("write-side adding feed failed");
         }
     }
 

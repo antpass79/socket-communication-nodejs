@@ -52,3 +52,9 @@ The following picture shows the sequence diagram for add command of the first ve
 - https://github.com/speedment/speedment/wiki/Tutorial:-Create-an-Event-Sourced-System
 
 - https://blog.sebastian-daschner.com/entries/event_sourcing_cqrs_video_course
+
+### Miscellaneous
+
+- https://rfvallina.com/blog/2015/11/12/share-private-node-dot-js-modules-across-applications-locally.html
+
+- https://www.twilio.com/blog/2017/06/writing-a-node-module-in-typescript.html

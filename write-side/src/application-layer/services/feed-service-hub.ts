@@ -17,7 +17,7 @@ export class FeedServiceHub {
   async add(feed: Feed): Promise<boolean> {
     let result = await this.feedService.add(feed);
     if (result.ok) {
-      console.log('Feed to send');
+      console.log('write-side feed to add:');
       console.log(result.insertedFeed);
       this.socketServer.addFeed(result.insertedFeed);
     }

@@ -12,31 +12,30 @@ export class MongoPool {
     }
 
     static async connect() {
-        console.log('connecting to mongodb');
+        console.log('read-side connecting to mongodb');
 
         try {
             if (!MongoPool._db) {
-                console.log('setting client');
+                console.log('read-side setting client');
                 let client = await MongoClient.connect(nodeConfig.getValue("CONNECTION_STRING"), { useNewUrlParser: true })
                 MongoPool._db = client.db(nodeConfig.getValue("DATABASE_NAME"));
-                console.log(MongoPool._db);
             }
         } catch (error) {
-            console.log('error during connecting to mongodb: ');
+            console.log('read-side error during connecting to mongodb: ');
             console.error(error);
         }
     }
 
     static async disconnect() {
-        console.log('disconnecting to mongodb');
+        console.log('read-side disconnecting to mongodb');
 
         try {
             if (!MongoPool._db) {
-                console.log('closing client');
+                console.log('read-side closing client');
                 (MongoPool._db as MongoClient).close();
             }
         } catch (error) {
-            console.log('error during disconnecting to mongodb: ');
+            console.log('read-side error during disconnecting to mongodb: ');
             console.error(error);
         }
     }

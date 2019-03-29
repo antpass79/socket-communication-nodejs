@@ -13,11 +13,13 @@ export class FeedServiceHub {
 
     constructor(app: express.Application = express()) {
         this._feedService = new FeedService(app, this._nodeConfig.getValue('SERVER_SOCKET_PORT'));
-        this._socketClient = new SocketClient(this._nodeConfig.getValue('CLIENT_SOCKET_ENDPINT'));
+        this._socketClient = new SocketClient(this._nodeConfig.getValue('CLIENT_SOCKET_ENDPOINT'));
     }
 
     public start() {
         this._socketClient.on('feedAdded', (feed: Feed) => {
+            console.log('read-side feed to broadcast:');
+            console.log(feed);
             this._feedService.broadcast(feed);
         });
     }

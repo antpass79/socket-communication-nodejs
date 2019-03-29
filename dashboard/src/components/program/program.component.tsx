@@ -27,8 +27,9 @@ export class Program extends React.Component<props, state> {
     }
 
     componentDidMount() {    
-        let socketClientService = new SocketClientService('http://localhost:4001');
+        let socketClientService = new SocketClientService('http://localhost:4005');
         socketClientService.on('feedAdded', (feed: Feed) => {
+            console.log('feed from socket:');
             console.log(feed);
 
             this.setState(state => {
@@ -54,19 +55,7 @@ export class Program extends React.Component<props, state> {
 
         this.setBusy(true);
 
-        this._feedService.add(feed).then((response) => {
-
-            // response.json().then((insertedFeed: Feed) => {
-
-            //     console.log(insertedFeed);
-
-            //     this.setState(state => {
-            //         const feeds = [...state.feeds, insertedFeed];
-            //         return {
-            //             feeds
-            //         };
-            //     });
-            // })
+        this._feedService.add(feed).then(() => {
         })
         .catch((error) => {
             console.log(error);
