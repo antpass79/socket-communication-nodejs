@@ -65,6 +65,20 @@ export class Program extends React.Component<props, state> {
         });
     }
 
+    handleChangeFeed = (feed: Feed) => {
+
+        this.setBusy(true);
+
+        this._feedService.update(feed).then(() => {
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        .finally(() => {
+            this.setBusy(false);
+        });
+    }
+
     handleRemoveFeed = (feed: Feed) => {
 
         this.setBusy(true);
@@ -91,7 +105,7 @@ export class Program extends React.Component<props, state> {
     }
 
     renderFeedList() {
-        return <FeedList feeds={this.state.feeds} onRemoveFeed={this.handleRemoveFeed} />;
+        return <FeedList feeds={this.state.feeds} onChangeFeed={this.handleChangeFeed} onRemoveFeed={this.handleRemoveFeed} />;
     }
 
     render() {
