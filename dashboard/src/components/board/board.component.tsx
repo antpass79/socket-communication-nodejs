@@ -31,11 +31,11 @@ export class Board extends React.Component<props> {
       <div className="board">
         <div className="board-row row-up">
           <div className="program">{this.renderProgram()}</div>
-          <div  className="settings">{this.renderSettings()}</div>
+          {/* <div  className="settings">{this.renderSettings()}</div> */}
         </div>
-        <div className="graph board-row">
+        {/* <div className="graph board-row">
           {this.renderGraph()}
-        </div>
+        </div> */}
       </div>
     );
   }

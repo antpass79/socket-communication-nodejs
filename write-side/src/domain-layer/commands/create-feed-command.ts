@@ -1,7 +1,7 @@
 import { FeedServiceHub } from "../../application-layer/services/feed-service-hub";
 import { Feed } from "../../models/feed";
 // import { CommandHandler, Command } from "../ddd/commands/command";
-import { CommandHandler, Command } from 'ddd-abstraction';
+import { CommandHandler, Command } from './command';
 
 export class CreateFeedCommand extends Command {
 

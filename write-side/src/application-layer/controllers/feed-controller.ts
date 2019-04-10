@@ -1,7 +1,6 @@
 import { Feed } from '../../models/feed';
 import { CreateFeedCommand } from "../../domain-layer/commands/create-feed-command";
-// import { CommandBus } from '../../domain-layer/ddd/commands/command-bus';
-import { CommandBus } from 'ddd-abstraction';
+import { CommandBus } from '../../domain-layer/commands/command-bus';
 
 export class FeedController {
 

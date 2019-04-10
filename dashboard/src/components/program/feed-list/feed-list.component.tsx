@@ -47,19 +47,19 @@ export class FeedList extends React.Component<props> {
                 accessor: 'text',
                 Cell: (props: any) => <span>{props.value}</span> 
             },
-            {
-                Header: '',
-                Cell: (props: any) =>(
-                    <div>
-                        <button onClick={this.onChangeFeed(props.original)}>Change</button>
-                        <input type="text" ref={this.feedInput}></input>
-                    </div>
-                )
-            },
-            {
-                Header: '',
-                Cell: (props: any) => <button onClick={this.onRemoveFeed(props.original)}>Remove</button>
-            }
+            // {
+            //     Header: '',
+            //     Cell: (props: any) =>(
+            //         <div>
+            //             <button onClick={this.onChangeFeed(props.original)}>Change</button>
+            //             <input type="text" ref={this.feedInput}></input>
+            //         </div>
+            //     )
+            // },
+            // {
+            //     Header: '',
+            //     Cell: (props: any) => <button onClick={this.onRemoveFeed(props.original)}>Remove</button>
+            // }
         ]
         const data = this.props.feeds;        
 
